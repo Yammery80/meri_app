@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mongo5a/screens/groups_screens.dart';
+import 'package:mongo5a/services/mongo_services.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await MongoServices().connect();
   runApp(const MainApp());
 }
 
@@ -10,11 +14,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+      home: GroupsScreen(),
     );
   }
 }

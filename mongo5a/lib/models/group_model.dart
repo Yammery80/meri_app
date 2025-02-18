@@ -15,6 +15,7 @@ GroupModel({
 });
 
 //Convertir de Dart a json para enviarle a atlas
+//Se usará para insertar y editar
 Map<String, dynamic> toJson(){
   return {
     '_id': id,
@@ -23,7 +24,8 @@ Map<String, dynamic> toJson(){
     'albums': albums
   };
 }
-//Convertir de json a Dart
+//Convertir de json a Dart cuando se recupera de atlas
+//Se usará para select
 factory GroupModel.fromJson(Map<String, dynamic> json){
   var id = json['_id'];
 

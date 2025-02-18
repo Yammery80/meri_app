@@ -1,3 +1,4 @@
+import 'package:mongo5a/models/group_model.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
 class MongoServices{
@@ -27,5 +28,9 @@ class MongoServices{
     return _db;
   }
 
-
+  Future<List<GroupModel>> getGroups() async {
+    var collection =db.collection('groups');
+    var groups = await collection.find().toList();
+    return groups.map((grupo) => GroupModel.fromJson(grupo)).toList();
+      }
 }
