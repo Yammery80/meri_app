@@ -46,8 +46,6 @@ factory GroupModel.fromJson(Map<String, dynamic> json){
     name: json['name'] as String, 
     type: json['type'] as String, 
     albums: json['albums'] as int
- 
-    
     );
 }
 }
