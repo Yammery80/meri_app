@@ -3,6 +3,7 @@ import 'package:mongo5a/models/group_model.dart';
 import 'package:mongo5a/services/mongo_services.dart';
 import 'dart:developer';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
+import 'package:mongo5a/screens/insert_group_screen.dart';
 
 class GroupsScreen extends StatefulWidget {
   const GroupsScreen({super.key});
@@ -45,10 +46,29 @@ class _GroupsScreenState extends State<GroupsScreen> {
     return  Scaffold(
     appBar: AppBar(
       title: const Text('Groups data'),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: GestureDetector(
+            onTap: () async {
+              await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const InsertGroupScreen(),
+                ),
+              );
+              _fetchGroups();
+            },
+            child: const Icon(
+              Icons.add,
+              size: 20.0,
+              ),
+          ),
+        ),
+      ],
       ),
       body: ListView.builder(
-        itemCount: groups.length, 
-        itemBuilder: (context, index){
+        itemCount: groups.length,
+        itemBuilder: (context, index) {
           var group = groups[index];
           return oneTile(group);
         },
@@ -119,7 +139,8 @@ void _showEditDialog(GroupModel group){
 
   ListTile oneTile(GroupModel group){
     return ListTile(
-    title: Text(group.name),
+    title: Text(group.name,
+    style: Theme.of(context).textTheme.headlineMedium), //Texto
     subtitle: Text(group.type),
     trailing: Row(
       mainAxisSize: MainAxisSize.min,

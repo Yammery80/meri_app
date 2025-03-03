@@ -8,5 +8,6 @@
             "program": "lib/main.dart",
             "flutterMode": "debug"
         }
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

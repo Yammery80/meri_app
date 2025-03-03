@@ -62,5 +62,9 @@ class MongoServices{
       mongo.modify.set('name', group.name).set('type', group.type).set('albums', group.albums),
     );
   }
-
+  
+  Future<void> insertGroup(GroupModel group) async {
+    final collection = _db.collection('groups');
+    await collection.insertOne(group.toJson());
+  }
 }
