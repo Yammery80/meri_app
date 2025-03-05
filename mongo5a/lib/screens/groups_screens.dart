@@ -45,7 +45,7 @@ class _GroupsScreenState extends State<GroupsScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
     appBar: AppBar(
-      title: const Text('Groups data'),
+      title: const Text('Grupos'),
       actions: [
         Padding(
           padding: const EdgeInsets.all(16.0),
@@ -97,6 +97,7 @@ void _showEditDialog(GroupModel group){
     context: context, 
     builder: (context) {
       return AlertDialog(
+        backgroundColor:  Colors.white, // Cambia el fondo del dialogo
         title: const Text('Editar Grupo'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -118,6 +119,10 @@ void _showEditDialog(GroupModel group){
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.white, // Color del texto de "Cancelar"
+              backgroundColor: Colors.red, // Color de fondo de "Cancelar"
+            ),
             child: const Text('Cancelar'),
           ),
           TextButton(
@@ -129,6 +134,10 @@ void _showEditDialog(GroupModel group){
               _updateGroup(group);
               Navigator.pop(context);
             },
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.white, // Color del texto de "Actualizar"
+              backgroundColor: Color.fromARGB(255, 4, 93, 93), // Color de fondo de "Actualizar"
+            ),
             child: const Text('Actualizar'),
           ),
         ],
@@ -141,16 +150,22 @@ void _showEditDialog(GroupModel group){
     return ListTile(
     title: Text(group.name,
     style: Theme.of(context).textTheme.headlineMedium), //Texto
-    subtitle: Text(group.type),
+    subtitle: Row(
+      children: [
+        Text(group.type, style: TextStyle(fontWeight: FontWeight.bold),), //Tipo
+        const SizedBox(width: 10.0),
+        Text(' ${group.albums.toString()} albums'), //Albums
+      ],
+    ),
     trailing: Row(
       mainAxisSize: MainAxisSize.min,
       children:[
         IconButton(
           onPressed: () => _showEditDialog(group),
-          icon: const Icon(Icons.edit)), //Icono de editar
+          icon: const Icon(Icons.edit, color: Color.fromARGB(255, 4, 93, 93),)), //Icono de editar
         IconButton(
           onPressed: () => _deleteGroup(group.id),
-          icon: const Icon(Icons.delete)), //Icono de eliminar
+          icon: const Icon(Icons.delete, color: Color.fromARGB(255, 4, 93, 93),)), //Icono de eliminar
          ],
        ),
     );

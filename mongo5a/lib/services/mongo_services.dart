@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:mongo5a/models/group_model.dart';
+import 'package:mongo5a/models/songs_model.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'dart:developer';
 
@@ -67,4 +68,37 @@ class MongoServices{
     final collection = _db.collection('groups');
     await collection.insertOne(group.toJson());
   }
+
+  //Songs
+
+
+  Future<List<SongsModel>> getSongs() async {
+    final collection =db.collection('songs');
+    log('Collecion obtenida; $collection');
+    var songs = await collection.find().toList();
+    log('En MongoServices $songs');
+    if (songs.isEmpty) {
+    log('No se encontraron grupos en la colexion');
+    }
+    return songs.map((musica) => SongsModel.fromJson(musica)).toList();
+  }
+
+  Future<void> deleteSong(mongo.ObjectId id) async {
+    final collection = db.collection('songs');
+    await collection.remove(mongo.where.eq('_id', id));
+  }
+
+  Future<void> updateSong(SongsModel songs) async {
+    final collection = _db.collection('songs');
+    await collection.updateOne(
+      mongo.where.eq('_id', songs.id),
+      mongo.modify.set('name', songs.name).set('singer', songs.singer).set('mins', songs.mins),
+    );
+  }
+  
+  Future<void> insertSong(SongsModel songs) async {
+    final collection = _db.collection('songs');
+    await collection.insertOne(songs.toJson());
+  }
+
 }

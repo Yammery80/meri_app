@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mongo5a/screens/groups_screens.dart';
+import 'package:mongo5a/screens/main_screen.dart';
 import 'package:mongo5a/services/mongo_services.dart';
 import 'package:mongo5a/widgets/theme.dart';
 
@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: tema1(),
-      home: const GroupsScreen(),
+      home: MainScreen(), 
     );
   }
 }
